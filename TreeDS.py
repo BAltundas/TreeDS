@@ -33,6 +33,11 @@ class Tree:
             print(root.data)
             self.traverse_inorder(root.right)
             
+    def height(self,root):
+        if root is None:
+            return -1
+        return max(self.height(root.left),self.height(root.right))+1
+            
 tree = Tree()
 root = tree.createNode(5)
 
@@ -46,5 +51,9 @@ tree.insert(root,20)
 tree.insert(root,30)
 tree.insert(root,6)
 tree.insert(root,8)
+
 print('---In traverse order---:')
 tree.traverse_inorder(root)
+
+print('==height====')
+print(f'height of the tree is {tree.height(root)}')
