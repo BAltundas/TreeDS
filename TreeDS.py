@@ -13,7 +13,34 @@ class Node:
         self.left = None
         self.right = None
         self.data = value
+
+def levelOrder(root):
+    q=[]
+    q.append(root)
+    while len(q)!=0:
+        root =q.pop(0)
+        print(root.data, end=' ')
+        if root.left is not None:
+            q.append(root.left)
+        if root.right is not None:
+            q.append(root.right)
+
+def checkBST(root):
+    def in_order(root,values):
+        if root is None:
+            return
+        in_order(root.left,values)
+        values.append(root.data)
+        in_order(root.right,values)
         
+    values = []
+    in_order(root, values)
+    
+    for i in range(len(values)-1):
+        if values[i]>=values[i+1]:
+            return False
+    return True
+      
 class Tree:
     def createNode(self,data):
         return Node(data)
@@ -37,7 +64,7 @@ class Tree:
         if root is None:
             return -1
         return max(self.height(root.left),self.height(root.right))+1
-            
+   
 tree = Tree()
 root = tree.createNode(5)
 
@@ -57,3 +84,10 @@ tree.traverse_inorder(root)
 
 print('==height====')
 print(f'height of the tree is {tree.height(root)}')
+
+print('==Level Order')
+print(f'{levelOrder(root)}')
+
+BST = checkBST(root)
+
+print(f'The tree is a BST:{BST}')
